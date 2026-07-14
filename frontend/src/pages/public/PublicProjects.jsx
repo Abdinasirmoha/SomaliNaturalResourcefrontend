@@ -8,6 +8,8 @@ import marineImg from '../../assets/somali_marine_resources_underwater_photograp
 import forestImg from '../../assets/somali_forest_resources_ancient_frankincense_and_myrrh_trees_on_a_rocky.png';
 import renewableEnergyImg from '../../assets/renewable_energy.jpg';
 
+import logoImg from '../../assets/logo.png';
+
 const PublicProjects = () => {
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -85,7 +87,7 @@ const PublicProjects = () => {
             alt="Sustainable Future" 
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#003b5c]/90 via-[#004a70]/70 to-transparent"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-[#003b5c]/95 via-[#004a70]/70 to-transparent"></div>
           
           {/* Sunlight Effect */}
           <div className="absolute -top-40 -right-40 w-[800px] h-[800px] bg-amber-400/20 rounded-full blur-[120px] mix-blend-screen pointer-events-none"></div>
@@ -93,21 +95,31 @@ const PublicProjects = () => {
           <div className="absolute top-20 right-40 w-[200px] h-[200px] bg-white/10 rounded-full blur-[40px] mix-blend-screen pointer-events-none"></div>
         </div>
         
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex flex-col justify-center">
-          <div className="max-w-3xl">
-            <h1 className="text-5xl md:text-6xl font-extrabold text-white mb-6 leading-tight whitespace-pre-line">
-              {t('projects.hero.title')}
-            </h1>
-            <p className="text-xl text-white/90 mb-10 leading-relaxed max-w-2xl font-light">
-              {t('projects.hero.desc')}
-            </p>
-            <div className="flex flex-wrap gap-4">
-              <button className="inline-flex items-center justify-center px-8 py-4 bg-white text-[#004a70] rounded-full shadow-lg text-sm font-bold hover:bg-gray-50 transition-colors">
-                {t('projects.hero.btn1')}
-              </button>
-              <button className="inline-flex items-center justify-center px-8 py-4 border-2 border-white/80 text-white rounded-full text-sm font-bold hover:bg-white hover:text-[#004a70] transition-colors backdrop-blur-sm">
-                {t('projects.hero.btn2')}
-              </button>
+        <div className="relative z-10 h-full flex flex-col justify-center max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-4xl flex items-center gap-10">
+            <div className="hidden md:flex w-56 h-56 shrink-0 bg-white p-3 rounded-full shadow-2xl items-center justify-center overflow-hidden">
+              <img src={logoImg} alt="SNRMS Logo" className="w-full h-full object-contain mix-blend-multiply" />
+            </div>
+            <div>
+              <div className="mb-4">
+                <span className="bg-white/20 backdrop-blur-sm text-white text-xs font-bold px-4 py-2 rounded-full uppercase tracking-widest border border-white/30">
+                  {t('projects.hero.badge') || "FEDERAL GOVERNMENT OF SOMALIA"}
+                </span>
+              </div>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-6 leading-tight drop-shadow-md whitespace-pre-line">
+                {t('projects.hero.title')}
+              </h1>
+              <p className="text-lg md:text-xl text-white/90 mb-10 leading-relaxed font-light drop-shadow">
+                {t('projects.hero.desc')}
+              </p>
+              <div className="flex flex-wrap gap-4">
+                <button className="inline-flex items-center justify-center px-8 py-4 bg-white text-[#004a70] rounded-full shadow-lg text-sm font-bold hover:bg-gray-50 transition-colors">
+                  {t('projects.hero.btn1')}
+                </button>
+                <button className="inline-flex items-center justify-center px-8 py-4 border-2 border-white/80 text-white rounded-full text-sm font-bold hover:bg-white hover:text-[#004a70] transition-colors backdrop-blur-sm">
+                  {t('projects.hero.btn2')}
+                </button>
+              </div>
             </div>
           </div>
         </div>
