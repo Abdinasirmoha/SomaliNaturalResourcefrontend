@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { Eye, EyeOff } from 'lucide-react';
 import logoImg from '../assets/logo.png';
+import bgImg from '../assets/home_resources_hero.jpg';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -33,8 +34,11 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-cover bg-center" style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1549480017-d76466a4b7e8?auto=format&fit=crop&q=80&w=2000")' }}>
-      <div className="absolute inset-0 bg-black bg-opacity-30"></div>
+    <div className="relative min-h-screen w-full flex items-center justify-center">
+      <div className="absolute inset-0 z-0">
+        <img src={bgImg} alt="Background" className="w-full h-full object-cover" />
+        <div className="absolute inset-0 bg-black bg-opacity-40"></div>
+      </div>
       
       <div className="relative z-10 bg-white w-full max-w-md rounded-lg shadow-2xl overflow-hidden">
         <div className="p-8">
