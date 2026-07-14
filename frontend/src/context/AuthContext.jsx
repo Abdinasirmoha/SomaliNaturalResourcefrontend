@@ -23,7 +23,7 @@ export const AuthProvider = ({ children }) => {
       
       // Check if it's a network error (server down, CORS, etc.)
       if (error.code === 'ERR_NETWORK') {
-        errorMessage = 'Cannot connect to server. Is the ASP.NET backend running on https://localhost:7183 ?';
+        errorMessage = 'Cannot connect to server. Please check if the backend is running.';
       } else if (error.response?.data) {
         // Try to extract error message from ASP.NET Core response
         errorMessage = error.response.data.message || error.response.data.title || 'Invalid credentials.';
