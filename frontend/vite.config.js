@@ -9,9 +9,9 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'https://localhost:7183',
+        target: 'https://somalinaturalresource-1.onrender.com',
         changeOrigin: true,
-        secure: false, // Important: ignores self-signed SSL cert errors common in local ASP.NET dev
+        secure: false,
       },
     },
   },
