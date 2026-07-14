@@ -86,6 +86,11 @@ const PublicProjects = () => {
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-[#003b5c]/90 via-[#004a70]/70 to-transparent"></div>
+          
+          {/* Sunlight Effect */}
+          <div className="absolute -top-40 -right-40 w-[800px] h-[800px] bg-amber-400/20 rounded-full blur-[120px] mix-blend-screen pointer-events-none"></div>
+          <div className="absolute -top-20 -right-20 w-[400px] h-[400px] bg-yellow-200/30 rounded-full blur-[80px] mix-blend-overlay pointer-events-none"></div>
+          <div className="absolute top-20 right-40 w-[200px] h-[200px] bg-white/10 rounded-full blur-[40px] mix-blend-screen pointer-events-none"></div>
         </div>
         
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex flex-col justify-center">
