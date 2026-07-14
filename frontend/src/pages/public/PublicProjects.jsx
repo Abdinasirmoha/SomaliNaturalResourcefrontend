@@ -221,50 +221,50 @@ const PublicProjects = () => {
             </form>
           </div>
 
-          <div className="space-y-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {loading ? (
-              <div className="text-center py-10 text-gray-500">{t('projects.active.loading')}</div>
+              <div className="col-span-full text-center py-10 text-gray-500">{t('projects.active.loading')}</div>
             ) : projects.length > 0 ? (
               projects.map(project => (
-                <div key={project.projectID} className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-gray-700 flex flex-col md:flex-row items-center gap-8">
-                  <div className="w-full md:w-1/3">
-                    <h4 className="text-xl font-bold text-[#004a70] dark:text-blue-400 mb-1 leading-tight">{project.projectName}</h4>
-                    <p className="text-[10px] text-gray-400 uppercase tracking-widest font-bold">
+                <div key={project.projectID} className="bg-white dark:bg-gray-800 rounded-3xl overflow-hidden shadow-sm border border-gray-100 dark:border-gray-700 flex flex-col hover:shadow-xl transition-all duration-300 relative group">
+                  <div className="p-8 flex flex-col flex-1">
+                    <div className="flex justify-between items-start mb-6">
+                      <div className="w-12 h-12 rounded-xl bg-[#f0f7fb] dark:bg-gray-700 flex items-center justify-center shadow-sm border border-gray-100 dark:border-gray-600">
+                        {getCategoryIcon(project.resource?.category?.categoryName)}
+                      </div>
+                      <span className={`px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest ${getStatusColor(project.status).split(' ')[1]} text-white shadow-sm`}>
+                        {project.status}
+                      </span>
+                    </div>
+                    
+                    <h4 className="text-xl font-bold text-gray-900 dark:text-white mb-2 leading-snug">{project.projectName}</h4>
+                    <p className="text-[10px] text-gray-400 uppercase tracking-widest font-bold mb-6">
                       {project.resource?.category?.categoryName || t('projects.active.generalProject')}
                     </p>
-                  </div>
-                  
-                  <div className="w-full md:w-1/3">
-                    <div className="flex justify-between text-xs font-bold text-gray-500 dark:text-gray-400 mb-2">
-                      <span className="truncate pr-2">{project.companyName || t('projects.active.govInitiative')}</span>
-                      <span className={getStatusColor(project.status).split(' ')[0]}>{project.status}</span>
-                    </div>
-                    <div className="w-full bg-gray-100 dark:bg-gray-700 rounded-full h-2">
-                      <div className={`h-2 rounded-full ${getStatusColor(project.status).split(' ')[1]}`} style={{ width: getProgressWidth(project.status) }}></div>
-                    </div>
-                  </div>
-                  
-                  <div className="w-full md:w-1/3 flex items-center justify-end gap-6 md:border-l border-gray-100 dark:border-gray-700 md:pl-8">
-                    <div className="text-right">
-                      <div className="flex items-center justify-end gap-1 text-sm font-bold text-gray-900 dark:text-white mb-1">
-                        <Calendar className="w-3 h-3 text-gray-400" />
+
+                    <div className="mt-auto pt-6 border-t border-gray-100 dark:border-gray-700 space-y-4">
+                      <div className="flex items-center text-sm text-gray-600 dark:text-gray-300 font-medium">
+                        <Building2 className="w-4 h-4 mr-3 text-gray-400" />
+                        <span className="truncate">{project.companyName || t('projects.active.govInitiative')}</span>
+                      </div>
+                      <div className="flex items-center text-sm text-gray-600 dark:text-gray-300 font-medium">
+                        <Calendar className="w-4 h-4 mr-3 text-gray-400" />
                         {formatDisplayDate(project.startDate)} - {formatDisplayDate(project.endDate) || t('projects.active.present')}
                       </div>
-                      <div className="flex items-center justify-end gap-1 text-[10px] text-gray-400 uppercase tracking-widest font-bold">
-                        <MapPin className="w-3 h-3" />
-                        {project.resource?.location || t('projects.active.somalia')}
+                      <div className="flex items-center text-sm text-gray-600 dark:text-gray-300 font-medium">
+                        <MapPin className="w-4 h-4 mr-3 text-gray-400" />
+                        <span className="truncate">{project.resource?.location || t('projects.active.somalia')}</span>
                       </div>
-                    </div>
-                    <div className="flex gap-2">
-                      <div className="w-10 h-10 rounded-full bg-gray-50 dark:bg-gray-700 flex items-center justify-center text-gray-600 dark:text-gray-300 border border-gray-100 dark:border-gray-600 shadow-sm">
-                        {getCategoryIcon(project.resource?.category?.categoryName)}
+                      
+                      <div className="w-full bg-gray-100 dark:bg-gray-700 rounded-full h-1.5 mt-6 overflow-hidden">
+                        <div className={`h-full rounded-full ${getStatusColor(project.status).split(' ')[1]}`} style={{ width: getProgressWidth(project.status) }}></div>
                       </div>
                     </div>
                   </div>
                 </div>
               ))
             ) : (
-              <div className="text-center py-10 text-gray-500">{t('projects.active.empty')}</div>
+              <div className="col-span-full text-center py-10 text-gray-500">{t('projects.active.empty')}</div>
             )}
           </div>
         </div>
