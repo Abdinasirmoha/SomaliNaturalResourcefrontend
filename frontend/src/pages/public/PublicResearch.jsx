@@ -75,18 +75,18 @@ const PublicResearch = () => {
   return (
     <div className="w-full bg-[#f8fafc] dark:bg-gray-900 pb-24 transition-colors duration-300">
       {/* Featured Research Hero */}
-      <section className="pt-12 px-4 sm:px-6 lg:px-8 max-w-[1600px] mx-auto">
-        <div className="relative w-full h-[500px] rounded-[40px] overflow-hidden shadow-2xl">
-          <div className="absolute inset-0 z-0">
-            <img 
-              src={heroImg} 
-              alt="Climate Resilience" 
-              className="w-full h-full object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-r from-[#003b5c]/90 via-[#004a70]/50 to-transparent"></div>
-          </div>
-          
-          <div className="relative z-10 h-full flex flex-col justify-center p-12 md:p-20 max-w-3xl">
+      <section className="relative w-full h-[500px] overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <img 
+            src={heroImg} 
+            alt="Climate Resilience" 
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#003b5c]/90 via-[#004a70]/50 to-transparent"></div>
+        </div>
+        
+        <div className="relative z-10 h-full flex flex-col justify-center max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl">
             <div className="mb-6">
               <span className="bg-[#004a70] text-white text-xs font-bold px-4 py-2 rounded-full uppercase tracking-widest border border-white/20">
                 {t('research.hero.badge')}
