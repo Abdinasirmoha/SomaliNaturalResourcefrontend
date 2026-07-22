@@ -158,37 +158,25 @@ const Projects = () => {
         <div className="bg-white p-5 rounded-2xl border border-gray-100 shadow-sm flex flex-col justify-between">
           <p className="text-[12px] font-bold text-gray-500 tracking-wide mb-2">Active Projects</p>
           <div className="flex items-end justify-between">
-            <h3 className="text-4xl font-bold text-[#003b5c]">24</h3>
-            <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-bold bg-emerald-50 text-emerald-700">
-               +12% ↑
-            </span>
+            <h3 className="text-4xl font-bold text-[#003b5c]">{projects.filter(p => p.status === 'Ongoing').length}</h3>
           </div>
         </div>
         <div className="bg-white p-5 rounded-2xl border border-gray-100 shadow-sm flex flex-col justify-between">
           <p className="text-[12px] font-bold text-gray-500 tracking-wide mb-2">Under Review</p>
           <div className="flex items-end justify-between">
-            <h3 className="text-4xl font-bold text-amber-500">08</h3>
-            <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-bold bg-gray-100 text-gray-600">
-               Standard
-            </span>
+            <h3 className="text-4xl font-bold text-amber-500">{projects.filter(p => p.status === 'Under Review').length}</h3>
           </div>
         </div>
         <div className="bg-white p-5 rounded-2xl border border-gray-100 shadow-sm flex flex-col justify-between">
           <p className="text-[12px] font-bold text-gray-500 tracking-wide mb-2">Completed</p>
           <div className="flex items-end justify-between">
-            <h3 className="text-4xl font-bold text-emerald-600">142</h3>
-            <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-bold bg-emerald-50 text-emerald-700">
-               +5% ↑
-            </span>
+            <h3 className="text-4xl font-bold text-emerald-600">{projects.filter(p => p.status === 'Completed').length}</h3>
           </div>
         </div>
         <div className="bg-white p-5 rounded-2xl border border-gray-100 shadow-sm flex flex-col justify-between">
-          <p className="text-[12px] font-bold text-gray-500 tracking-wide mb-2">Revenue (FY24)</p>
+          <p className="text-[12px] font-bold text-gray-500 tracking-wide mb-2">Total Projects</p>
           <div className="flex items-end justify-between">
-            <h3 className="text-4xl font-bold text-[#003b5c]">$12.4M</h3>
-            <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-bold bg-blue-50 text-blue-700">
-               +18% ↑
-            </span>
+            <h3 className="text-4xl font-bold text-[#003b5c]">{projects.length}</h3>
           </div>
         </div>
       </div>

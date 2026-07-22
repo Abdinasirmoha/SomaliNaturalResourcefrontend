@@ -16,7 +16,7 @@ const Reports = () => {
   
   // Advanced Filters
   const [selectedEntity, setSelectedEntity] = useState('Overview');
-  const [selectedYear, setSelectedYear] = useState('2024');
+  const [selectedYear, setSelectedYear] = useState('All');
   const [selectedMonth, setSelectedMonth] = useState('All');
   
   const [currentPage, setCurrentPage] = useState(1);
@@ -80,19 +80,17 @@ const Reports = () => {
       baseData = [...reports];
     }
 
-    // 2. Filter by Year
     if (selectedYear !== 'All') {
       baseData = baseData.filter(item => {
-        if (!item.reportDate) return false;
+        if (!item || !item.reportDate) return false;
         const year = new Date(item.reportDate).getFullYear().toString();
         return year === selectedYear;
       });
     }
 
-    // 3. Filter by Month
     if (selectedMonth !== 'All') {
       baseData = baseData.filter(item => {
-        if (!item.reportDate) return false;
+        if (!item || !item.reportDate) return false;
         // getMonth is 0-indexed (0 = Jan, 11 = Dec)
         const month = new Date(item.reportDate).getMonth();
         return month.toString() === selectedMonth;
@@ -210,29 +208,29 @@ const Reports = () => {
     if (selectedEntity === 'Projects') {
       return (
         <>
-          <SummaryCard title="Total Projects" value={projects.length} trend="+5%" type="positive" icon={Briefcase} />
-          <SummaryCard title="Active Projects" value={projects.filter(p => p.status === 'Active').length} trend="On Track" type="neutral" icon={ActivityIcon} />
-          <SummaryCard title="Completed" value={projects.filter(p => p.status === 'Completed').length} trend="Target Met" type="positive" icon={Target} />
-          <SummaryCard title="Budget Utilization" value="84%" trend="Optimal" type="positive" icon={TrendingUp} />
+          <SummaryCard title="Total Projects" value={projects.length} type="positive" icon={Briefcase} />
+          <SummaryCard title="Active Projects" value={projects.filter(p => p.status === 'Ongoing').length} type="neutral" icon={ActivityIcon} />
+          <SummaryCard title="Completed" value={projects.filter(p => p.status === 'Completed').length} type="positive" icon={Target} />
+          <SummaryCard title="Under Review" value={projects.filter(p => p.status === 'Under Review').length} type="neutral" icon={AlertCircle} />
         </>
       );
     } else if (selectedEntity === 'Users') {
       return (
         <>
-          <SummaryCard title="Total Users" value={users.length} trend="+12%" type="positive" icon={Users} />
-          <SummaryCard title="Admins" value={users.filter(u => u.role === 'Admin').length} trend="Stable" type="neutral" icon={Target} />
-          <SummaryCard title="Data Entry" value={users.filter(u => u.role === 'DataEntry').length} trend="Growing" type="positive" icon={TrendingUp} />
-          <SummaryCard title="Inactive" value="2" trend="Alert" type="negative" icon={AlertCircle} />
+          <SummaryCard title="Total Users" value={users.length} type="positive" icon={Users} />
+          <SummaryCard title="Admins" value={users.filter(u => u.role === 'Admin').length} type="neutral" icon={Target} />
+          <SummaryCard title="Data Entry" value={users.filter(u => u.role === 'DataEntry').length} type="positive" icon={TrendingUp} />
+          <SummaryCard title="Inactive" value={users.filter(u => u.status === 'Inactive' || u.isActive === false).length} type="negative" icon={AlertCircle} />
         </>
       );
     } else {
       // Default / Overview
       return (
         <>
-          <SummaryCard title="Total Reports" value={filteredData.length} trend="+12%" type="positive" icon={FileText} />
-          <SummaryCard title="Annual Growth" value="24.8%" trend="On Track" type="neutral" icon={TrendingUp} />
-          <SummaryCard title="Conservation KPI" value="89.2" trend="Target Met" type="positive" icon={Target} />
-          <SummaryCard title="Pending Audits" value={filteredData.filter(r => r.reportType !== 'Progress').length} trend="Alert" type="negative" icon={AlertCircle} />
+          <SummaryCard title="Total Reports" value={filteredData.length} type="positive" icon={FileText} />
+          <SummaryCard title="Progress Reports" value={filteredData.filter(r => r.reportType === 'Progress').length} type="neutral" icon={TrendingUp} />
+          <SummaryCard title="Financial Reports" value={filteredData.filter(r => r.reportType === 'Financial').length} type="positive" icon={Target} />
+          <SummaryCard title="Environmental Reports" value={filteredData.filter(r => r.reportType === 'Environmental').length} type="negative" icon={AlertCircle} />
         </>
       );
     }
@@ -293,6 +291,8 @@ const Reports = () => {
               className="block w-full pl-10 pr-10 py-2.5 text-sm bg-gray-50 border-gray-200 rounded-xl focus:ring-[#005c8a] focus:border-[#005c8a] text-gray-900 font-medium appearance-none shadow-sm cursor-pointer"
             >
               <option value="All">All Time</option>
+              <option value="2026">2026</option>
+              <option value="2025">2025</option>
               <option value="2024">2024</option>
               <option value="2023">2023</option>
               <option value="2022">2022</option>
@@ -443,7 +443,7 @@ const Reports = () => {
                         </div>
                         <div>
                           <div className="text-sm font-bold text-gray-900">{report.summary || `Q3 ${selectedYear !== 'All' ? selectedYear : '2024'} ${report.reportType} Audit`}</div>
-                          <div className="text-xs text-gray-500 mt-0.5">ID: REP-{selectedYear !== 'All' ? selectedYear : '2024'}-{report.reportID.toString().padStart(3, '0')}</div>
+                          <div className="text-xs text-gray-500 mt-0.5">ID: REP-{selectedYear !== 'All' ? selectedYear : '2024'}-{(report.reportID || report._id || report.id || '0').toString().padStart(3, '0')}</div>
                         </div>
                       </div>
                     </td>
@@ -607,14 +607,16 @@ const SummaryCard = ({ title, value, trend, type, icon: Icon }) => {
       </div>
       <div className="flex items-end justify-between">
         <h3 className="text-3xl font-black text-gray-900 tracking-tight">{value}</h3>
-        <span className={`inline-flex items-center px-2 py-1 rounded text-xs font-bold ${
-          type === 'positive' ? 'bg-green-100 text-green-700' : 
-          type === 'negative' ? 'bg-red-100 text-red-700' : 
-          'bg-blue-100 text-blue-700'
-        }`}>
-           {type === 'positive' || type === 'neutral' ? <TrendingUp className="w-3 h-3 mr-1" /> : <AlertCircle className="w-3 h-3 mr-1" />}
-           {trend}
-        </span>
+        {trend && (
+          <span className={`inline-flex items-center px-2 py-1 rounded text-xs font-bold ${
+            type === 'positive' ? 'bg-green-100 text-green-700' : 
+            type === 'negative' ? 'bg-red-100 text-red-700' : 
+            'bg-blue-100 text-blue-700'
+          }`}>
+             {type === 'positive' || type === 'neutral' ? <TrendingUp className="w-3 h-3 mr-1" /> : <AlertCircle className="w-3 h-3 mr-1" />}
+             {trend}
+          </span>
+        )}
       </div>
     </div>
   );
