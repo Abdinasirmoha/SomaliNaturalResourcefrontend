@@ -85,7 +85,7 @@ const Dashboard = () => {
       <div className="flex justify-between items-end">
         <div>
           <h1 className="text-2xl font-bold text-gray-900">Resource Dashboard</h1>
-          <p className="text-gray-500 text-sm mt-1">Overview of Somalia's natural resource inventory and active projects.</p>
+          <p className="text-gray-500 text-sm mt-1">Overview of Somalia's natural resource inventory and active projects in somalia.</p>
         </div>
         <div className="text-sm text-gray-500 bg-white px-3 py-1.5 rounded-md border border-gray-200">
           {new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
